@@ -1,1 +1,13 @@
-<p>home works!</p>
+<img *ngIf="showImage" src="{{storeInfo.imageUrl}}" alt="store img" class="img-fluid m-1 store-img">      <!-- {{Interpolation}} -->
+<!-- <img [src]="storeInfo.imageUrl" alt="store img" >       <!-- [Property binding]--> 
+<br>
+<button class="btn btn-primary" (click)="toggleImage()">Show Image</button>
+<hr>
+<h1>{{storeInfo.name}}</h1>
+
+<h3>Barnches:</h3>
+<!-- Structural Directives e.g., *ngFor -->
+<ul>
+    <li *ngFor="let b of storeInfo.branches">{{b}}</li>
+</ul>
+
