@@ -1,0 +1,57 @@
+<div class="mb-3">
+    <label for="prdCat" class="form-label">Category</label>
+    <!-- <select #cat name="cat" id="prdCat" class="form-control" (change)="getSelectdCat(cat.value)"> -->
+    <!-- <select #cat name="cat" id="prdCat" class="form-control" (change)="getSelectdCat($event)"> -->
+    <select name="cat" id="prdCat" class="form-control" [(ngModel)]="selectedCatId">
+        <option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</option>
+    </select>
+    
+</div>
+<div class="text-secondary">
+    Selected Category: {{selectedCatId}} 
+    <br>
+    <input type="button" class="btn btn-primary" [class.btn-secondary]="isSecondary"  (click)="changeCat()" value="Cat 1">
+</div>
+<hr>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Buy</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of productList" 
+            [class.d-none]="selectedCatId != product.categoryId">     
+            <!-- Safe Navigation Operator -->
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>
+                <img [src]="product.imageURL" alt="product img">     <!--[src] => property binding -->
+            </td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+
+            <!-- Template variable (#itemCount)-->
+            <td><input #itemCount type="number" class="form-control" value="1"></td>
+            <td>
+                <input type="button" 
+                    class="btn btn-secondary" 
+                    [class.btn-danger]="product.quantity === 0" 
+                    value="Buy" 
+                    (click)="buy(product.price, itemCount.value)">
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h3>
+    Order Total Price: {{orderToralPrice}}
+</h3>
