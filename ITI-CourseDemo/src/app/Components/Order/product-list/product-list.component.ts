@@ -29,7 +29,7 @@ export class ProductListComponent {
         id: 2,
         name: 'Product 2',
         price: 12,  
-        quantity: 2,
+        quantity: 0,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 1
       },
@@ -45,7 +45,7 @@ export class ProductListComponent {
         id: 4,
         name: 'Product 4',
         price: 23,  
-        quantity: 8,
+        quantity: 1,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 3
       },
@@ -72,6 +72,11 @@ export class ProductListComponent {
       {id: 2, name: "Cat 2"},
       {id: 3, name: "Cat 3"},
     ]
+  }
+
+  productTrackByFn(index:number, product:IProduct):number 
+  {
+    return product.id;
   }
 
   buy(productPrice:number, count:string) {

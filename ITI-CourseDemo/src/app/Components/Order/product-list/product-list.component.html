@@ -26,15 +26,33 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of productList" 
-            [class.d-none]="selectedCatId != product.categoryId">     
+        <!-- <tr *ngFor="let product of productList" [class.d-none]="selectedCatId != product.categoryId">      -->
+        <!-- <tr *ngFor="let product of productList; let i = index" > -->
+        <!-- <tr *ngFor="let product of productList; index as i; TrackBy:productTrackByFn" > -->
+        <!-- <tr *ngFor="let product of productList; index as i"  [hidden]="product.quantity === 0"> -->
+        <!-- 
+        <ng-container *ngFor="let product of productList; let i = index">
+        <tr *ngIf="product.quantity !== 0">
+        -->
+        <tr *ngFor="let product of productList; let i = index">
             <!-- Safe Navigation Operator -->
-            <td>{{product.id}}</td>
+            <td>{{i + 1}}</td>
             <td>{{product.name}}</td>
             <td>
                 <img [src]="product.imageURL" alt="product img">     <!--[src] => property binding -->
             </td>
-            <td>{{product.quantity}}</td>
+            <td>
+                <!-- 
+                <div *ngIf="product.quantity != 0; else OutOfStock">{{product.quantity}}</div>
+                <ng-template #OutOfStock>Out of stock</ng-template> 
+                -->
+
+                <ng-container [ngSwitch]="product.quantity">
+                    <div *ngSwitchCase="0">Out of stock</div>
+                    <div *ngSwitchCase="1">Last item</div>
+                    <div *ngSwitchDefault>{{product.quantity}}</div>
+                </ng-container>
+            </td>
             <td>{{product.price}}</td>
 
             <!-- Template variable (#itemCount)-->
@@ -43,10 +61,12 @@
                 <input type="button" 
                     class="btn btn-secondary" 
                     [class.btn-danger]="product.quantity === 0" 
+                    [class.disabled]="product.quantity === 0"
                     value="Buy" 
                     (click)="buy(product.price, itemCount.value)">
             </td>
         </tr>
+        <!-- </ng-container> -->
     </tbody>
 </table>
 
