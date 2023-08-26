@@ -11,6 +11,8 @@
     Selected Category: {{selectedCatId}} 
     <br>
     <input type="button" class="btn btn-primary" [class.btn-secondary]="isSecondary"  (click)="changeCat()" value="Cat 1">
+    <br>
+    <h3>Today's Date: {{today | date: 'short'}}</h3>
 </div>
 <hr>
 <table class="table table-striped">
@@ -20,7 +22,8 @@
             <th>Name</th>
             <th>Image</th>
             <th>Quantity</th>
-            <th>Price</th>
+            <th>Price in USD</th>
+            <th>Price in EGP</th>
             <th>Count</th>
             <th>Buy</th>
         </tr>
@@ -39,7 +42,10 @@
             <td>{{i + 1}}</td>
             <td>{{product.name}}</td>
             <td>
-                <img [src]="product.imageURL" alt="product img">     <!--[src] => property binding -->
+                <!-- <img LightBox highlightColor="blue" [src]="product.imageURL" alt="product img">     [src] => property binding -->
+                <!-- <img LightBox="blue" [src]="product.imageURL" alt="product img">      -->
+                <!-- <img [LightBox]="ReadFromPropInTS" [src]="product.imageURL" alt="product img">      -->
+                <img LightBox="blue" defaultColor="gray" [src]="product.imageURL" alt="product img">     
             </td>
             <td>
                 <!-- 
@@ -53,7 +59,8 @@
                     <div *ngSwitchDefault>{{product.quantity}}</div>
                 </ng-container>
             </td>
-            <td>{{product.price}}</td>
+            <td>{{product.price | currency:'USD':'symbol'}}</td>
+            <td>{{product.price | USDtoEGP: 34 | currency:'EGP'}}</td>
 
             <!-- Template variable (#itemCount)-->
             <td><input #itemCount type="number" class="form-control" value="1"></td>

@@ -14,13 +14,14 @@ export class ProductListComponent {
   selectedCatId:number = 0;
   orderToralPrice:number = 0;
   isSecondary:boolean = true;
+  today:Date;
 
   constructor() {
     this.productList = [
       {
         id: 1,
         name: 'Product 1',
-        price: 10,  
+        price: 100000,  
         quantity: 5,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 1
@@ -28,7 +29,7 @@ export class ProductListComponent {
       {
         id: 2,
         name: 'Product 2',
-        price: 12,  
+        price: 120000,  
         quantity: 0,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 1
@@ -36,7 +37,7 @@ export class ProductListComponent {
       {
         id: 3,
         name: 'Product 3',
-        price: 8,  
+        price: 80000,  
         quantity: 15,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 2
@@ -44,7 +45,7 @@ export class ProductListComponent {
       {
         id: 4,
         name: 'Product 4',
-        price: 23,  
+        price: 230000,  
         quantity: 1,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 3
@@ -52,7 +53,7 @@ export class ProductListComponent {
       {
         id: 5,
         name: 'Product 5',
-        price: 18,  
+        price: 180000,  
         quantity: 10,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 3
@@ -60,7 +61,7 @@ export class ProductListComponent {
       {
         id: 6,
         name: 'Product 6',
-        price: 24,  
+        price: 240000,  
         quantity: 0,
         imageURL: 'https://fakeimg.pl/200x100/',
         categoryId: 1
@@ -72,6 +73,8 @@ export class ProductListComponent {
       {id: 2, name: "Cat 2"},
       {id: 3, name: "Cat 3"},
     ]
+    
+    this.today = new Date();
   }
 
   productTrackByFn(index:number, product:IProduct):number 
